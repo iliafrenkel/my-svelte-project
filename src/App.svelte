@@ -6,22 +6,23 @@
 
 <style>
 	h1 {
-		color: rgb(20, 48, 100);
+		color: #333;
+		text-align: center;
+        /* font-family: 'Raleway', Arial, Helvetica, sans-serif, monospace; */
+        font-family: 'Montserrat', Arial, Helvetica, sans-serif, monospace;
+		font-weight: 300;
 	}
 	.notes-app {
-		width: 800px;
+		width: 900px;
 		margin: 0 auto;
 		padding: 1em;
-		border: solid 1px #ffff;
+		/* border: solid 1px #ffff;
 		border-radius: 0.5em;
-        box-shadow: 4px 2px 6px 1px #ccc;
+        box-shadow: 4px 2px 6px 1px #ccc; */
 	}
 </style>
 
-<h1>Hello {name}!</h1>
-<Button/>
-<hr/>
-<h2 style="text-align: center">My Notes in a tree</h2>
+<h1>{name} application</h1>
 <div class="notes-app">
 	<Note
 		id="1"
@@ -42,7 +43,7 @@
 		<Note
 			id="10"
 			title="Elit ut amet ex in proident est nisi excepteur anim do duis qui dolor."
-			content="Eu tempor magna sunt in consectetur."
+			content="Eu tempor magna sunt in consectetur. Voluptate ad veniam commodo irure tempor et nisi enim. Ad nisi elit proident excepteur. Occaecat incididunt laborum tempor aute id culpa minim nisi irure pariatur et dolore. Voluptate cillum sit ullamco aliquip sit cupidatat laboris deserunt do ipsum qui esse."
 		/>
 		<Note
 			id="11"

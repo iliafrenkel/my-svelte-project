@@ -27,6 +27,10 @@
         padding: 0.25em;
         font-size: 1em;
         position: relative;
+        border-radius: 0.5em;
+    }
+    .note:hover {
+        background-color: #f8f8fa;
     }
     button {
         padding: 0;

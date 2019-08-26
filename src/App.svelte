@@ -1,29 +1,70 @@
 <script>
+	import { onDestroy } from 'svelte';
+	import { notes } from './store.js';
 	import Button from './Button.svelte';
 	import Note from './Note.svelte';
 	export let name;
+	let notes_data;
+	let root = {
+		id: 0,
+		title: "Home",
+		content: "",
+		children: []
+	};
+
+	const unsubscribe = notes.subscribe(value => {notes_data = value});
+	root.children = notes_data;
+	onDestroy(unsubscribe);
+
+	function drill_down(note) {
+		console.log(note);
+		return;
+		if (note) {
+			root = note;
+		}
+	}
 </script>
 
 <style>
 	h1 {
 		color: #333;
 		text-align: center;
-        /* font-family: 'Raleway', Arial, Helvetica, sans-serif, monospace; */
         font-family: 'Montserrat', Arial, Helvetica, sans-serif, monospace;
 		font-weight: 300;
+	}
+	h2 {
+		color: #333;
+        font-family: 'Montserrat', Arial, Helvetica, sans-serif, monospace;
+		font-weight: 400;
+		font-size: 100%;
 	}
 	.notes-app {
 		width: 900px;
 		margin: 0 auto;
 		padding: 1em;
-		/* border: solid 1px #ffff;
-		border-radius: 0.5em;
-        box-shadow: 4px 2px 6px 1px #ccc; */
+	}
+	.root-content {
+        font-family: 'Montserrat', Arial, Helvetica, sans-serif, monospace;
+		font-weight: 300;
+		font-size: 90%;
 	}
 </style>
 
 <h1>{name} application</h1>
 <div class="notes-app">
+	<h2>{root.title}</h2>
+	<p class="root-content">{root.content}</p>
+	{#each root.children as note (note.id)}
+		<Note
+			id={note.id}
+			title={note.title}
+			content={note.content}
+			children={note.children}
+			onBulletClick={() => {root = note;}}
+		/>
+	{/each}
+
+<!--
 	<Note
 		id="1"
 		title="Ex ex id ea officia commodo id enim nisi do elit."
@@ -88,4 +129,5 @@
 			content="Tempor nostrud nulla Lorem dolore ex esse consectetur."
 		/>
 	</Note>
+-->
 </div>

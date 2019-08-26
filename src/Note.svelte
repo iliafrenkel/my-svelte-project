@@ -4,14 +4,14 @@
     export let id;
     export let title;
     export let content = "";
+    export let children = [];
+    export let onBulletClick = () => {console.log('Bullet clicked.')};
     export let collapsed = true;
 
     let hovering;
-
 	function enter() {
 		hovering = true;
 	}
-
 	function leave() {
 		hovering = false;
     }
@@ -84,7 +84,7 @@
 
 <div class="note" id={id}>
     <div class="header" on:mouseenter={enter} on:mouseleave={leave}>
-        <button class="bullet" tabindex=-1>
+        <button class="bullet" tabindex=-1 on:click={onBulletClick}>
             <svg viewBox="0 0 18 18" fill="currentColor">
                 <circle cx="9" cy="9" r="3.5"></circle>
             </svg>
@@ -94,7 +94,6 @@
                 <path d="M13.75 9.56879C14.0833 9.76124 14.0833 10.2424 13.75 10.4348L8.5 13.4659C8.16667 13.6584 7.75 13.4178 7.75 13.0329L7.75 6.97072C7.75 6.58582 8.16667 6.34525 8.5 6.5377L13.75 9.56879Z" stroke="none" fill="currentColor"></path>
             </svg>
         </button>
-        <!-- </a> -->
         <div class="title">
             <Editor text={title}/>
         </div>
@@ -106,7 +105,9 @@
     </div>
     {#if !collapsed}
     <div class="children" transition:slide="{{duration:200}}">
-        <slot></slot>
+        {#each children as note (note.id)}
+            <svelte:self {...note} />
+        {/each}
     </div>
     {/if}
 </div>
